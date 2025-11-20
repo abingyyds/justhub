@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JustHub - Web3 Knowledge Club</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+    <div class="login-container">
+        <div class="login-card">
+            <div class="logo-area">
+                <!-- 使用 FontAwesome 图标代替图片 -->
+                <i class="fas fa-cube fa-3x" style="color: var(--primary-color); margin-bottom: 16px;"></i>
+                <h1>JustHub</h1>
+                <p>连接高价值 Web3 认知社群</p>
+            </div>
+
+            <div class="login-methods">
+                <!-- ZKP 登录 (主推) -->
+                <div class="zkp-input-group">
+                    <label>ZKP 凭证 (Zero-Knowledge Proof)</label>
+                    <input type="text" class="zkp-input" placeholder="粘贴您的 zk-SNARK proof..." id="zkpInput">
+                </div>
+                
+                <button class="btn-primary" onclick="handleLogin('zkp')">
+                    <i class="fas fa-shield-halved"></i>
+                    ZKP 匿名登录
+                </button>
+
+                <div class="divider">
+                    <span>或</span>
+                </div>
+
+                <!-- 钱包登录 (次要) -->
+                <button class="btn-wallet" onclick="handleLogin('wallet')">
+                    <i class="fas fa-wallet"></i>
+                    连接钱包 (MetaMask)
+                </button>
+            </div>
+
+            <div style="margin-top: 24px; font-size: 12px; color: #9ca3af;">
+                <i class="fas fa-lock"></i> 您的隐私受到零知识证明保护
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function handleLogin(type) {
+            const btn = event.currentTarget;
+            const originalText = btn.innerHTML;
+            
+            if (type === 'zkp') {
+                const input = document.getElementById('zkpInput');
+                if (!input.value) {
+                    // 演示用，自动填充
+                    input.value = "0x1293...zkp_proof_valid";
+                }
+                btn.innerHTML = '<i class="fas fa-circle-notch fa-spin"></i> 验证链上凭证...';
+            } else {
+                btn.innerHTML = '<i class="fas fa-circle-notch fa-spin"></i> 连接中...';
+            }
+
+            // 模拟延迟跳转
+            setTimeout(() => {
+                window.location.href = 'home.html';
+            }, 1500);
+        }
+    </script>
+</body>
+</html>
+

@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>俱乐部管理后台 - JustHub</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .admin-container {
+            display: flex;
+            gap: 20px;
+            max-width: 1100px;
+            margin: 80px auto 20px;
+            padding: 0 20px;
+        }
+        .admin-sidebar {
+            width: 240px;
+            background: white;
+            border-radius: 8px;
+            padding: 12px;
+            height: fit-content;
+        }
+        .admin-content {
+            flex: 1;
+            background: white;
+            border-radius: 8px;
+            padding: 32px;
+            min-height: 600px;
+        }
+        .admin-menu-item {
+            display: flex;
+            align-items: center;
+            padding: 12px 16px;
+            color: var(--text-main);
+            text-decoration: none;
+            border-radius: 6px;
+            margin-bottom: 4px;
+            cursor: pointer;
+        }
+        .admin-menu-item:hover {
+            background: #f3f4f6;
+        }
+        .admin-menu-item.active {
+            background: #ecfdf5;
+            color: var(--primary-color);
+            font-weight: 500;
+        }
+        .section-title {
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 24px;
+            padding-bottom: 16px;
+            border-bottom: 1px solid #f3f4f6;
+        }
+        .setting-row {
+            margin-bottom: 24px;
+        }
+        .setting-label {
+            font-weight: 600;
+            margin-bottom: 8px;
+            display: block;
+        }
+        .export-box {
+            background: #f8fafc;
+            border: 1px dashed #cbd5e1;
+            padding: 24px;
+            border-radius: 8px;
+            text-align: center;
+        }
+        .external-link-card {
+            background: #f0fdf4;
+            border: 1px solid #bbf7d0;
+            padding: 24px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        /* 开关样式 */
+        .switch {
+            position: relative;
+            display: inline-block;
+            width: 40px;
+            height: 20px;
+        }
+        .switch input { 
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            transition: .4s;
+            border-radius: 20px;
+        }
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 16px;
+            width: 16px;
+            left: 2px;
+            bottom: 2px;
+            background-color: white;
+            transition: .4s;
+            border-radius: 50%;
+        }
+        input:checked + .slider {
+            background-color: var(--primary-color);
+        }
+        input:checked + .slider:before {
+            transform: translateX(20px);
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="app-header">
+        <div class="header-left">
+            <a href="home.html" class="header-logo">
+                <i class="fas fa-cube"></i> JustHub <span style="font-size: 12px; background: #f3f4f6; padding: 2px 6px; border-radius: 4px; margin-left: 8px; color: #666;">管理后台</span>
+            </a>
+        </div>
+        <div class="header-right">
+            <a href="profile.html" style="color: var(--text-secondary); text-decoration: none; font-size: 14px;">
+                <i class="fas fa-arrow-left"></i> 返回个人中心
+            </a>
+        </div>
+    </nav>
+
+    <div class="admin-container">
+        <!-- 左侧管理菜单 -->
+        <div class="admin-sidebar">
+            <div style="padding: 12px; margin-bottom: 12px; border-bottom: 1px solid #f3f4f6;">
+                <div style="font-weight: 600;">My Web3 DAO</div>
+                <div style="font-size: 12px; color: #999;">mydao.web3.club</div>
+            </div>
+            <div class="admin-menu-item active" onclick="switchTab('settings')">
+                <i class="fas fa-cog" style="width: 24px;"></i> 俱乐部设置
+            </div>
+            <div class="admin-menu-item" onclick="switchTab('payment')">
+                <i class="fas fa-coins" style="width: 24px;"></i> 知识付费/门槛
+            </div>
+            <div class="admin-menu-item" onclick="switchTab('members')">
+                <i class="fas fa-users" style="width: 24px;"></i> 成员管理
+            </div>
+            <div class="admin-menu-item" onclick="switchTab('export')">
+                <i class="fas fa-download" style="width: 24px;"></i> 数据导出
+            </div>
+        </div>
+
+        <!-- 右侧内容区 -->
+        <div class="admin-content">
+            
+            <!-- 1. 基本设置 -->
+            <div id="tab-settings">
+                <div class="section-title">基本信息设置</div>
+                <div class="setting-row">
+                    <label class="setting-label">俱乐部名称</label>
+                    <input type="text" class="form-input" value="My Web3 DAO">
+                </div>
+                <div class="setting-row">
+                    <label class="setting-label">俱乐部简介</label>
+                    <textarea class="form-textarea">这是一个专注于 Web3 治理和 DAO 工具研究的社区。</textarea>
+                </div>
+                
+                <!-- 新增：内容权限设置 -->
+                <div class="setting-row" style="background: #f9fafb; padding: 16px; border-radius: 8px;">
+                    <label class="setting-label" style="margin-bottom: 12px;">内容权限</label>
+                    <div style="display: flex; align-items: center; justify-content: space-between;">
+                        <div>
+                            <div style="font-weight: 500;">允许普通成员发布主题</div>
+                            <div style="font-size: 12px; color: #666;">关闭后，仅星主、管理员和嘉宾可以发帖，普通成员仅可评论</div>
+                        </div>
+                        <label class="switch">
+                            <input type="checkbox" checked>
+                            <span class="slider"></span>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="setting-row">
+                    <label class="setting-label">俱乐部头像</label>
+                    <div style="display: flex; align-items: center; gap: 16px;">
+                        <img src="https://api.dicebear.com/7.x/identicon/svg?seed=myclub" style="width: 64px; height: 64px; border-radius: 8px;">
+                        <button class="btn-wallet" style="width: auto;">更换头像</button>
+                    </div>
+                </div>
+                <button class="btn-primary" style="width: 120px;" onclick="saveSettings()">保存修改</button>
+            </div>
+
+            <!-- 2. 知识付费/门槛设置 (跳转) -->
+            <div id="tab-payment" style="display: none;">
+                <div class="section-title">加入门槛设置</div>
+                
+                <div class="external-link-card">
+                    <div>
+                        <h3 style="color: #166534; margin-bottom: 8px;">前往 Web3.Club 配置合约</h3>
+                        <p style="font-size: 14px; color: #15803d;">
+                            付费金额、Token 门槛等核心逻辑需在链上合约中设置。<br>
+                            请前往 Web3.Club 域名详情页进行管理。
+                        </p>
+                    </div>
+                    <button class="btn-primary" style="width: auto;" onclick="window.open('https://web3.club/domain-details?domainName=mydao', '_blank')">
+                        去设置 <i class="fas fa-external-link-alt" style="margin-left: 6px;"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- 3. 成员管理 (角色设置 + 禁言) -->
+            <div id="tab-members" style="display: none;">
+                <div class="section-title">成员管理 (128)</div>
+                <div style="display: flex; gap: 10px; margin-bottom: 16px;">
+                    <input type="text" class="form-input" placeholder="搜索成员地址或昵称..." style="width: 300px;">
+                    <button class="btn-wallet" style="width: auto;">搜索</button>
+                </div>
+                
+                <table style="width: 100%; border-collapse: collapse; font-size: 14px;">
+                    <tr style="background: #f9fafb; text-align: left;">
+                        <th style="padding: 12px;">成员</th>
+                        <th style="padding: 12px;">加入时间</th>
+                        <th style="padding: 12px;">当前角色</th>
+                        <th style="padding: 12px;">操作</th>
+                    </tr>
+                    <tr style="border-bottom: 1px solid #f3f4f6;">
+                        <td style="padding: 12px; display: flex; align-items: center; gap: 8px;">
+                            <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=1" style="width: 24px; height: 24px; border-radius: 50%;">
+                            <div>
+                                0x82...92a1
+                            </div>
+                        </td>
+                        <td style="padding: 12px;">2025-05-12</td>
+                        <td style="padding: 12px;"><span style="background: #dbeafe; color: #1e40af; padding: 2px 6px; border-radius: 4px; font-size: 12px;">会员</span></td>
+                        <td style="padding: 12px; display: flex; align-items: center; gap: 8px;">
+                            <select class="form-select" style="width: 90px; padding: 4px; font-size: 12px;" onchange="alert('角色已更新')">
+                                <option selected>会员</option>
+                                <option>管理员</option>
+                                <option>嘉宾</option>
+                            </select>
+                            <button class="btn-wallet" style="width: auto; padding: 4px 8px; color: #ef4444; border-color: #fee2e2;" title="禁言" onclick="toggleBan(this)">
+                                <i class="fas fa-comment-slash"></i>
+                            </button>
+                        </td>
+                    </tr>
+                    <tr style="border-bottom: 1px solid #f3f4f6;">
+                        <td style="padding: 12px; display: flex; align-items: center; gap: 8px;">
+                            <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=2" style="width: 24px; height: 24px; border-radius: 50%;">
+                            <div>
+                                vitalik.eth
+                            </div>
+                        </td>
+                        <td style="padding: 12px;">2025-05-10</td>
+                        <td style="padding: 12px;"><span style="background: #fce7f3; color: #be185d; padding: 2px 6px; border-radius: 4px; font-size: 12px;">嘉宾</span></td>
+                        <td style="padding: 12px; display: flex; align-items: center; gap: 8px;">
+                            <select class="form-select" style="width: 90px; padding: 4px; font-size: 12px;" onchange="alert('角色已更新')">
+                                <option>会员</option>
+                                <option>管理员</option>
+                                <option selected>嘉宾</option>
+                            </select>
+                            <button class="btn-wallet" style="width: auto; padding: 4px 8px; color: #ef4444; border-color: #fee2e2;" title="禁言" onclick="toggleBan(this)">
+                                <i class="fas fa-comment-slash"></i>
+                            </button>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+
+            <!-- 4. 数据导出 -->
+            <div id="tab-export" style="display: none;">
+                <div class="section-title">数据导出</div>
+                <p style="color: #666; margin-bottom: 24px;">您可以导出本俱乐部在 JustHub 产生的所有数据，包括成员列表、发表的主题、评论以及财务记录。数据所有权完全归您所有。</p>
+                
+                <div class="export-box">
+                    <i class="fas fa-file-archive" style="font-size: 48px; color: var(--primary-color); margin-bottom: 16px;"></i>
+                    <h3 style="margin-bottom: 8px;">全量数据备份</h3>
+                    <p style="font-size: 13px; color: #999; margin-bottom: 24px;">包含：members.csv, posts.json, revenue.xlsx</p>
+                    <button class="btn-primary" style="width: 200px; margin: 0 auto;" onclick="exportData()">
+                        <i class="fas fa-download"></i> 导出所有数据
+                    </button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <script>
+        function switchTab(tabName) {
+            // Hide all tabs
+            ['settings', 'payment', 'members', 'export'].forEach(t => {
+                document.getElementById('tab-' + t).style.display = 'none';
+            });
+            // Show selected tab
+            document.getElementById('tab-' + tabName).style.display = 'block';
+            
+            // Update menu active state
+            const items = document.querySelectorAll('.admin-menu-item');
+            items.forEach(item => item.classList.remove('active'));
+            event.currentTarget.classList.add('active');
+        }
+
+        function saveSettings() {
+            const btn = event.currentTarget;
+            const originalText = btn.innerText;
+            btn.innerText = '保存中...';
+            setTimeout(() => {
+                btn.innerText = '已保存';
+                setTimeout(() => btn.innerText = originalText, 2000);
+            }, 1000);
+        }
+
+        function exportData() {
+            const btn = event.currentTarget;
+            btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> 打包数据中...';
+            setTimeout(() => {
+                alert('数据打包完成！开始下载 mydao_backup_2025.zip');
+                btn.innerHTML = '<i class="fas fa-check"></i> 导出成功';
+            }, 2000);
+        }
+
+        function toggleBan(btn) {
+            if (btn.style.backgroundColor === 'rgb(254, 226, 226)' || btn.style.backgroundColor === '#fee2e2') {
+                 // 当前未禁言，点击禁言
+                 if(confirm('确定要禁言该用户吗？他将无法发布主题和评论。')) {
+                    btn.style.backgroundColor = '#ef4444';
+                    btn.style.color = 'white';
+                    btn.title = '解除禁言';
+                 }
+            } else {
+                // 当前已禁言，点击解除
+                btn.style.backgroundColor = 'white';
+                btn.style.color = '#ef4444';
+                btn.style.borderColor = '#fee2e2';
+                btn.title = '禁言';
+                alert('已解除禁言');
+            }
+        }
+    </script>
+</body>
+</html>

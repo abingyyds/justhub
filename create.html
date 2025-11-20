@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>注册俱乐部 - JustHub</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+    <!-- 顶部导航 -->
+    <nav class="app-header">
+        <div class="header-left">
+            <a href="home.html" class="header-logo">
+                <i class="fas fa-cube"></i> JustHub
+            </a>
+            <div class="header-nav">
+                <a href="home.html">星球 (Clubs)</a>
+                <a href="explore.html">发现 (Explore)</a>
+                <a href="create.html" class="active">注册 (Register)</a>
+            </div>
+        </div>
+        <div class="header-right">
+            <a href="profile.html" class="user-pill">
+                <i class="fas fa-user-astronaut"></i>
+                <span>0x71...3A92</span>
+            </a>
+        </div>
+    </nav>
+
+    <div class="main-container" style="justify-content: center;">
+        
+        <div class="content-center" style="max-width: 600px; text-align: center;">
+            <div style="margin-bottom: 40px;">
+                <div style="width: 80px; height: 80px; background: #ecfdf5; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 24px;">
+                    <i class="fas fa-globe" style="font-size: 40px; color: var(--primary-color);"></i>
+                </div>
+                <h1 style="font-size: 28px; margin-bottom: 16px;">拥有您的 Web3 社交主权</h1>
+                <p style="color: var(--text-secondary); font-size: 16px; line-height: 1.6;">
+                    JustHub 基于 <strong>Web3.Club</strong> 协议构建。<br>
+                    注册一个 <code>.web3.club</code> 域名，立即拥有属于您的去中心化知识星球。
+                </p>
+            </div>
+
+            <div class="form-container" style="text-align: left; padding: 40px;">
+                <label class="form-label" style="margin-bottom: 12px;">搜索并注册域名</label>
+                <div style="display: flex; gap: 12px; margin-bottom: 24px;">
+                    <div style="position: relative; flex: 1;">
+                        <input type="text" id="domainInput" class="form-input" placeholder="your-club-name" style="padding-right: 100px; height: 50px; font-size: 18px;">
+                        <span style="position: absolute; right: 16px; top: 50%; transform: translateY(-50%); color: #9ca3af; font-weight: 500;">.web3.club</span>
+                    </div>
+                    <button class="btn-primary" style="width: auto; padding: 0 32px; height: 50px;" onclick="redirectToWeb3Club()">
+                        去注册 <i class="fas fa-external-link-alt" style="margin-left: 8px;"></i>
+                    </button>
+                </div>
+
+                <div style="background: #f9fafb; padding: 20px; border-radius: 8px; font-size: 14px; color: var(--text-secondary);">
+                    <h4 style="color: var(--text-main); margin-bottom: 12px;"><i class="fas fa-info-circle"></i> 流程说明：</h4>
+                    <ol style="padding-left: 20px; display: flex; flex-direction: column; gap: 8px;">
+                        <li>前往 <strong>Web3.Club</strong> 官网铸造域名。</li>
+                        <li>回到 <strong>JustHub 个人中心</strong>，您创建的俱乐部将自动显示。</li>
+                        <li>进入 <strong>管理后台</strong>，设置付费门槛、管理成员和导出数据。</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        function redirectToWeb3Club() {
+            const domain = document.getElementById('domainInput').value.trim();
+            if(domain) {
+                // 按照要求跳转到指定格式的链接
+                const url = `https://web3.club/register?domain=${domain}`;
+                window.open(url, '_blank');
+            } else {
+                alert('请输入您想注册的域名');
+            }
+        }
+    </script>
+</body>
+</html>

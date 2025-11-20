@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>个人中心 - JustHub</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .profile-tabs {
+            display: flex;
+            border-bottom: 1px solid #e5e7eb;
+            margin-bottom: 20px;
+        }
+        .profile-tab {
+            padding: 12px 24px;
+            font-weight: 500;
+            color: var(--text-secondary);
+            cursor: pointer;
+            border-bottom: 2px solid transparent;
+        }
+        .profile-tab.active {
+            color: var(--primary-color);
+            border-bottom-color: var(--primary-color);
+        }
+        .club-manage-card {
+            background: white;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 16px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+            transition: all 0.2s;
+        }
+        .club-manage-card:hover {
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            border-color: var(--primary-color);
+        }
+        .manage-btn {
+            background: #ecfdf5;
+            color: var(--primary-color);
+            padding: 6px 16px;
+            border-radius: 6px;
+            font-size: 13px;
+            font-weight: 500;
+            text-decoration: none;
+            border: 1px solid transparent;
+        }
+        .manage-btn:hover {
+            border-color: var(--primary-color);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 顶部导航 -->
+    <nav class="app-header">
+        <div class="header-left">
+            <a href="home.html" class="header-logo">
+                <i class="fas fa-cube"></i> JustHub
+            </a>
+            <div class="header-nav">
+                <a href="home.html">俱乐部 (Clubs)</a>
+                <a href="explore.html">发现 (Explore)</a>
+                <a href="create.html">注册 (Register)</a>
+            </div>
+        </div>
+        <div class="header-right">
+            <a href="profile.html" class="user-pill" style="background: #ecfdf5; color: var(--primary-color);">
+                <i class="fas fa-user-astronaut"></i>
+                <span>0x71...3A92</span>
+            </a>
+        </div>
+    </nav>
+
+    <div class="main-container">
+        
+        <!-- 左侧菜单 -->
+        <div class="sidebar-left">
+            <div class="menu-card">
+                <a href="#" class="menu-item active">
+                    <i class="far fa-user"></i>
+                    <span>个人中心</span>
+                </a>
+                <a href="index.html" class="menu-item" style="color: #ef4444;">
+                    <i class="fas fa-sign-out-alt" style="color: #ef4444;"></i>
+                    <span>退出登录</span>
+                </a>
+            </div>
+        </div>
+
+        <!-- 右侧内容 -->
+        <div class="content-center">
+            <div class="profile-header" style="padding: 24px; text-align: left; display: flex; align-items: center; gap: 20px;">
+                <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=myseed" class="profile-avatar" style="margin-bottom: 0;">
+                <div style="flex: 1;">
+                    <h1 class="profile-name" style="font-size: 22px;">Web3 Explorer</h1>
+                    <div class="profile-wallet">0x71C...3A92</div>
+                </div>
+                
+                <!-- 数据统计同步 -->
+                <div style="display: flex; gap: 32px; text-align: center;">
+                    <div onclick="switchProfileTab('clubs')" style="cursor: pointer;">
+                        <div style="font-weight: bold; font-size: 20px;">12</div>
+                        <div style="font-size: 12px; color: #666;">俱乐部</div>
+                    </div>
+                    <div onclick="switchProfileTab('footprints')" style="cursor: pointer;">
+                        <div style="font-weight: bold; font-size: 20px;">340</div>
+                        <div style="font-size: 12px; color: #666;">足迹</div>
+                    </div>
+                    <div onclick="switchProfileTab('favorites')" style="cursor: pointer;">
+                        <div style="font-weight: bold; font-size: 20px;">89</div>
+                        <div style="font-size: 12px; color: #666;">收藏</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tabs -->
+            <div class="profile-tabs">
+                <div class="profile-tab active" id="tab-btn-clubs" onclick="switchProfileTab('clubs')">我的俱乐部</div>
+                <div class="profile-tab" id="tab-btn-footprints" onclick="switchProfileTab('footprints')">足迹</div>
+                <div class="profile-tab" id="tab-btn-favorites" onclick="switchProfileTab('favorites')">收藏</div>
+            </div>
+
+            <!-- Tab Content: 我的俱乐部 -->
+            <div id="content-clubs">
+                <h3 style="font-size: 14px; color: var(--primary-color); margin-bottom: 12px;">我创建的 (Owner)</h3>
+                <div class="club-manage-card">
+                    <div style="display: flex; align-items: center; gap: 12px;">
+                        <img src="https://api.dicebear.com/7.x/identicon/svg?seed=myclub" style="width: 48px; height: 48px; border-radius: 6px;">
+                        <div>
+                            <div style="font-weight: 600; font-size: 16px;">My Web3 DAO</div>
+                            <div style="font-size: 12px; color: var(--text-secondary); font-family: monospace;">mydao.web3.club</div>
+                        </div>
+                    </div>
+                    <div style="text-align: right;">
+                        <a href="admin.html" class="manage-btn">
+                            <i class="fas fa-cog"></i> 管理后台
+                        </a>
+                    </div>
+                </div>
+
+                <h3 style="font-size: 14px; color: var(--text-secondary); margin: 24px 0 12px;">我加入的 (Member)</h3>
+                <div class="club-manage-card">
+                    <div style="display: flex; align-items: center; gap: 12px;">
+                        <img src="https://api.dicebear.com/7.x/identicon/svg?seed=eth" style="width: 48px; height: 48px; border-radius: 6px;">
+                        <div>
+                            <div style="font-weight: 600; font-size: 16px;">以太坊研习社</div>
+                            <div style="font-size: 12px; color: var(--text-secondary);">eth.web3.club</div>
+                        </div>
+                    </div>
+                    <button class="btn-wallet" style="width: auto; padding: 6px 12px; font-size: 12px;" onclick="window.open('https://eth.web3.club', '_blank')">
+                        <i class="fas fa-external-link-alt"></i> 访问
+                    </button>
+                </div>
+            </div>
+
+            <!-- Tab Content: 足迹 -->
+            <div id="content-footprints" style="display: none;">
+                <div class="post-card">
+                    <div style="font-size: 13px; color: #999; margin-bottom: 8px;">浏览了主题 · 10分钟前</div>
+                    <div style="font-weight: 600; margin-bottom: 4px;">关于 EIP-4844 的技术细节讨论</div>
+                    <div style="font-size: 13px; color: #666;">来自：以太坊研习社</div>
+                </div>
+                <div class="post-card">
+                    <div style="font-size: 13px; color: #999; margin-bottom: 8px;">评论了主题 · 2小时前</div>
+                    <div style="font-weight: 600; margin-bottom: 4px;">Uniswap V4 Hook 机制分析</div>
+                    <div style="font-size: 13px; color: #666;">来自：DeFi Masters</div>
+                </div>
+            </div>
+
+            <!-- Tab Content: 收藏 -->
+            <div id="content-favorites" style="display: none;">
+                <div class="post-card">
+                    <div style="display: flex; justify-content: space-between;">
+                        <div style="font-weight: 600; margin-bottom: 4px;">Layer2 扩容方案终极对比</div>
+                        <i class="fas fa-star" style="color: #f59e0b;"></i>
+                    </div>
+                    <div style="font-size: 13px; color: #666;">收藏于 2025-05-15 · 来自：Zero-Knowledge 核心群</div>
+                </div>
+                <div class="post-card">
+                    <div style="display: flex; justify-content: space-between;">
+                        <div style="font-weight: 600; margin-bottom: 4px;">如何构建一个可持续的 DAO 经济模型</div>
+                        <i class="fas fa-star" style="color: #f59e0b;"></i>
+                    </div>
+                    <div style="font-size: 13px; color: #666;">收藏于 2025-05-10 · 来自：Governance DAO</div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+    <script>
+        function switchProfileTab(tabName) {
+            // Hide all contents
+            ['clubs', 'footprints', 'favorites'].forEach(t => {
+                document.getElementById('content-' + t).style.display = 'none';
+                document.getElementById('tab-btn-' + t).classList.remove('active');
+            });
+            
+            // Show selected
+            document.getElementById('content-' + tabName).style.display = 'block';
+            document.getElementById('tab-btn-' + tabName).classList.add('active');
+        }
+
+        // Check URL hash to switch tab automatically
+        if(window.location.hash === '#favorites') {
+            switchProfileTab('favorites');
+        }
+    </script>
+</body>
+</html>

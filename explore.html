@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>发现俱乐部 - JustHub</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+    <!-- 顶部导航 -->
+    <nav class="app-header">
+        <div class="header-left">
+            <a href="home.html" class="header-logo">
+                <i class="fas fa-cube"></i> JustHub
+            </a>
+            <div class="header-nav">
+                <a href="home.html">俱乐部 (Clubs)</a>
+                <a href="explore.html" class="active">发现 (Explore)</a>
+                <a href="create.html">注册 (Register)</a>
+            </div>
+        </div>
+        <div class="header-right">
+            <i class="far fa-bell" style="color: #6b7280; cursor: pointer;"></i>
+            <a href="profile.html" class="user-pill">
+                <i class="fas fa-user-astronaut"></i>
+                <span>0x71...3A92</span>
+            </a>
+        </div>
+    </nav>
+
+    <!-- 主体内容 -->
+    <div class="main-container">
+        
+        <!-- 左侧边栏 -->
+        <div class="sidebar-left">
+            <div class="menu-card">
+                <div class="club-list-header">
+                    <span>分类筛选</span>
+                </div>
+                <a href="#" class="menu-item active">
+                    <i class="fas fa-globe"></i>
+                    <span>全部俱乐部</span>
+                </a>
+                <a href="#" class="menu-item">
+                    <i class="fas fa-coins"></i>
+                    <span>DeFi & Trading</span>
+                </a>
+                <a href="#" class="menu-item">
+                    <i class="fas fa-image"></i>
+                    <span>NFT & Art</span>
+                </a>
+                <a href="#" class="menu-item">
+                    <i class="fas fa-code"></i>
+                    <span>Dev & Tech</span>
+                </a>
+            </div>
+        </div>
+
+        <!-- 中间内容：俱乐部网格 -->
+        <div class="content-center">
+            <div style="margin-bottom: 20px;">
+                <h2 style="font-size: 20px; margin-bottom: 8px;">探索 Web3 社区</h2>
+                <p style="color: var(--text-secondary); font-size: 14px;">浏览 Web3.Club 上的热门域名，加入俱乐部或直接进入 Hub 浏览内容。</p>
+            </div>
+
+            <div class="grid-container">
+                <!-- Card 1 -->
+                <div class="explore-card">
+                    <div class="explore-banner" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);"></div>
+                    <div class="explore-avatar">
+                        <img src="https://api.dicebear.com/7.x/identicon/svg?seed=alpha" style="width:100%; height:100%; border-radius: 6px;">
+                    </div>
+                    <div class="explore-content">
+                        <div class="explore-title">Alpha 猎人公会</div>
+                        <div style="font-size: 12px; color: var(--primary-color); margin-bottom: 8px; font-family: monospace;">alpha.web3.club</div>
+                        <div class="explore-desc">专注一级市场打新，每日更新最新的空投交互教程和白名单机会。</div>
+                        <div class="explore-meta">
+                            <span><i class="fas fa-users"></i> 2.4k</span>
+                            <span class="explore-tag">需持有 Pass 卡</span>
+                        </div>
+                        <div style="display: flex; gap: 8px;">
+                            <button class="btn-wallet" style="padding: 8px; font-size: 13px; flex: 1;" onclick="window.open('https://alpha.web3.club', '_blank')">
+                                加入俱乐部
+                            </button>
+                            <button class="btn-primary" style="padding: 8px; font-size: 13px; flex: 1;" onclick="window.location.href='home.html'">
+                                进入 Hub
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="explore-card">
+                    <div class="explore-banner" style="background: linear-gradient(135deg, #f6d365 0%, #fda085 100%);"></div>
+                    <div class="explore-avatar">
+                        <img src="https://api.dicebear.com/7.x/identicon/svg?seed=btc" style="width:100%; height:100%; border-radius: 6px;">
+                    </div>
+                    <div class="explore-content">
+                        <div class="explore-title">BTC 生态研究院</div>
+                        <div style="font-size: 12px; color: var(--primary-color); margin-bottom: 8px; font-family: monospace;">btc.web3.club</div>
+                        <div class="explore-desc">深入研究 Ordinals, BRC-20 及闪电网络技术发展。</div>
+                        <div class="explore-meta">
+                            <span><i class="fas fa-users"></i> 8.9k</span>
+                            <span class="explore-tag">0.01 BTC/年</span>
+                        </div>
+                        <div style="display: flex; gap: 8px;">
+                            <button class="btn-wallet" style="padding: 8px; font-size: 13px; flex: 1;" onclick="window.open('https://btc.web3.club', '_blank')">
+                                加入俱乐部
+                            </button>
+                            <button class="btn-primary" style="padding: 8px; font-size: 13px; flex: 1;" onclick="window.location.href='home.html'">
+                                进入 Hub
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="explore-card">
+                    <div class="explore-banner" style="background: linear-gradient(135deg, #84fab0 0%, #8fd3f4 100%);"></div>
+                    <div class="explore-avatar">
+                        <img src="https://api.dicebear.com/7.x/identicon/svg?seed=sol" style="width:100%; height:100%; border-radius: 6px;">
+                    </div>
+                    <div class="explore-content">
+                        <div class="explore-title">Solana 开发者营地</div>
+                        <div style="font-size: 12px; color: var(--primary-color); margin-bottom: 8px; font-family: monospace;">solana.web3.club</div>
+                        <div class="explore-desc">Rust 智能合约开发交流，黑客松组队。</div>
+                        <div class="explore-meta">
+                            <span><i class="fas fa-users"></i> 1.2k</span>
+                            <span class="explore-tag">免费 (需审核)</span>
+                        </div>
+                        <div style="display: flex; gap: 8px;">
+                            <button class="btn-wallet" style="padding: 8px; font-size: 13px; flex: 1;" onclick="window.open('https://solana.web3.club', '_blank')">
+                                加入俱乐部
+                            </button>
+                            <button class="btn-primary" style="padding: 8px; font-size: 13px; flex: 1;" onclick="window.location.href='home.html'">
+                                进入 Hub
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Card 4 -->
+                <div class="explore-card">
+                    <div class="explore-banner" style="background: linear-gradient(135deg, #a18cd1 0%, #fbc2eb 100%);"></div>
+                    <div class="explore-avatar">
+                        <img src="https://api.dicebear.com/7.x/identicon/svg?seed=dao" style="width:100%; height:100%; border-radius: 6px;">
+                    </div>
+                    <div class="explore-content">
+                        <div class="explore-title">Governance DAO</div>
+                        <div style="font-size: 12px; color: var(--primary-color); margin-bottom: 8px; font-family: monospace;">gov.web3.club</div>
+                        <div class="explore-desc">探讨去中心化治理模型，Tokenomics 设计。</div>
+                        <div class="explore-meta">
+                            <span><i class="fas fa-users"></i> 560</span>
+                            <span class="explore-tag">Token Gated</span>
+                        </div>
+                        <div style="display: flex; gap: 8px;">
+                            <button class="btn-wallet" style="padding: 8px; font-size: 13px; flex: 1;" onclick="window.open('https://gov.web3.club', '_blank')">
+                                加入俱乐部
+                            </button>
+                            <button class="btn-primary" style="padding: 8px; font-size: 13px; flex: 1;" onclick="window.location.href='home.html'">
+                                进入 Hub
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</body>
+</html>
