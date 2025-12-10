@@ -1,0 +1,21 @@
+{
+  "name": "JustHub",
+  "short_name": "JustHub",
+  "description": "Web3 Club Platform",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#ffffff",
+  "icons": [
+    {
+      "src": "/logo.png",
+      "sizes": "192x192 512x512",
+      "type": "image/png"
+    },
+    {
+      "src": "/logo-graphic.svg",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    }
+  ]
+}
